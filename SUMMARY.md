@@ -1,9 +1,6 @@
 # Table of contents
 
 * [Initial page](README.md)
-* [Java Script 基础](untitled.md)
-* [JS的内置对象](js-de-nei-zhi-dui-xiang.md)
-* [自定义对象](si-zi-ding-yi-dui-xiang.md)
 
 ## Js基础
 
