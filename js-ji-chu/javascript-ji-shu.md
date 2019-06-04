@@ -443,75 +443,95 @@ if(Sys.safari) alert('Safari: '+Sys.safari);
 
 ## 四、 摘录：
 
-1. 省略对象名称，用 with\(\) 命令。  
-如: document.write\(".....&lt;br/&gt;"\);  
-document.write\(".....&lt;br/&gt;"\);  
-可省略写为：  
-with \(document\) {  
-write\(".....&lt;br/&gt;"\);  
-write\(".....&lt;br/&gt;"\);  
-} //把相同的 document 省略掉。  
-省略对象名称，变量。  
-如： document.myForm.myText.value;  
-可省略写为： f = document.myForm; f.myText.value;
+### 1. 省略对象名称
 
-2.页面调试  
+```javascript
+//用 with() 命令。
+ document.write(".....<br/>");
+document.write(".....<br/>");
+//可省略写为：
+with (document) {
+write(".....<br/>");
+write(".....<br/>");
+} //把相同的 document 省略掉。
+//省略对象名称，变量。
+//如： document.myForm.myText.value;
+//可省略写为： f = document.myForm; f.myText.value;
+```
+
+### 2.页面调试
+
 javascript 加入如下语句，出错时会提示  
-注意： chrome、opera 和 safari 等浏览器不支持 window.onerror 事件\(w3c标准没有此事件\),需另外捕获出错信息  
-&lt;script type="text/javascript"&gt;  
-/\*\*  
-\* 这是出错调试代码  
-\* 当页面发生错误时，提示错误信息  
-\* @param msg 出错信息  
-\* @param url 出错文件的地址  
-\* @param sLine 发生错误的行  
-\* @return true 让出错时不显示出错图标  
-\*/  
-window.onerror = function \( msg, url, sLine \) {  
-var hostUrl = window.location.href;  
-// 判断网址,测试时可以提示出错信息;正式发布时不提示  
-if \( hostUrl.indexOf\("http://localhost"\) === 0 \|\| hostUrl.indexOf\("http://127.0.0.1"\) === 0 \|\|  
-hostUrl.indexOf\("http://192.168."\) === 0 \|\| hostUrl.indexOf\("file://"\) === 0 \)  
-{  
-var errorMsg = "当前页面的脚本发生错误.\n\n";  
-errorMsg += "错误: " + msg + "\n";  
-errorMsg += "URL: " + url + "\n";  
-errorMsg += "行: " + sLine + "\n\n";  
-errorMsg += "点击“确定”消去此错误，“取消”保留此错误。\n\n";  
-return window.confirm\( errorMsg \);  
-}  
-// 返回true,会消去 IE下那个恼人的“网页上有错误”的提示  
-return true;  
-};  
-&lt;/script&gt;
+注意： chrome、opera 和 safari 等浏览器不支持 window.onerror 事件\(w3c标准没有此事件\),需另外捕获出错信息
 
-3.把数值变成 奇 \ 偶数\(利用位运算\)  
-n = n \| 1 ; //一定得到奇数。如果原本是偶数则加一。  
-n = \(n &gt;&gt; 1\) &lt;&lt;1; //一定得到偶数。如果原本是奇数则减一。  
+```javascript
+<script type="text/javascript">
+/**
+* 这是出错调试代码
+* 当页面发生错误时，提示错误信息
+* @param msg 出错信息
+* @param url 出错文件的地址
+* @param sLine 发生错误的行
+* @return true 让出错时不显示出错图标
+*/
+window.onerror = function ( msg, url, sLine ) {
+var hostUrl = window.location.href;
+// 判断网址,测试时可以提示出错信息;正式发布时不提示
+if ( hostUrl.indexOf("http://localhost") === 0 || hostUrl.indexOf("http://127.0.0.1") === 0 ||
+hostUrl.indexOf("http://192.168.") === 0 || hostUrl.indexOf("file://") === 0 )
+{
+var errorMsg = "当前页面的脚本发生错误.\n\n";
+errorMsg += "错误: " + msg + "\n";
+errorMsg += "URL: " + url + "\n";
+errorMsg += "行: " + sLine + "\n\n";
+errorMsg += "点击“确定”消去此错误，“取消”保留此错误。\n\n";
+return window.confirm( errorMsg );
+}
+// 返回true,会消去 IE下那个恼人的“网页上有错误”的提示
+return true;
+};
+</script>
+```
+
+### 3.把数值变成 奇 \ 偶数\(利用位运算\)
+
+```javascript
+n = n | 1 ; //一定得到奇数。如果原本是偶数则加一。
+n = (n >> 1) <<1; //一定得到偶数。如果原本是奇数则减一。
 n = n ^ 1; //奇偶互换。对偶数加一，对奇数减一。
+```
 
-4.取出数值的整数部分\(取整\)。  
-// 以下第一种方法不受浏览器和版本的影响，后两种受版本影响。  
-n = \( n &gt; 0 \) ? Math.floor\(n\) : Math.ceil\(n\);  
-n = Number \( \(String\(n\).split\("."\)\)\[0\]\);  
-n = parseInt\(n,10\);  
-// 下面做法更简便高效,用位运算来做\(右移0位,或者两次取反\),且非数值型的值会转成0  
-alert\(5&gt;&gt;0\); alert\(~~5\); // 值为 5  
-alert\(5.55&gt;&gt;0\); alert\(~~5.55\); // 值为 5  
-alert\(-98.4&gt;&gt;0\); alert\(~~-98.4\); // 值为 -98  
-alert\('absd'&gt;&gt;0\); alert\(~~'absd'\); // 值为 0  
-alert\(null&gt;&gt;0\); alert\(~~null\); // 值为 0  
-alert\('34.5'&gt;&gt;0\); alert\(~~'34.5'\); // 值为 34
+### 4.取出数值的整数部分\(取整\)。
 
-5.取出数值的小数部分。  
-须先检查小数点是否存在。但有时会发生运算误差。  
-n = Math.abs\(n\); if\(n&gt;0\) n = n - Math.floor\(n\); else n = 0;  
-n = parseInt\(n,10\) - parseFloat\(n\);  
-if\(\(""+n\).indexOf\("."\) &gt; -1\) n = Number\("0."+\(String\(n\).split\("."\)\)\[1\]\); else n = 0;
+```javascript
+// 以下第一种方法不受浏览器和版本的影响，后两种受版本影响。
+n = ( n > 0 ) ? Math.floor(n) : Math.ceil(n);
+n = Number ( (String(n).split("."))[0]);
+n = parseInt(n,10);
+// 下面做法更简便高效,用位运算来做(右移0位,或者两次取反),且非数值型的值会转成0
+alert(5>>0); alert(~~5); // 值为 5
+alert(5.55>>0); alert(~~5.55); // 值为 5
+alert(-98.4>>0); alert(~~-98.4); // 值为 -98
+alert('absd'>>0); alert(~~'absd'); // 值为 0
+alert(null>>0); alert(~~null); // 值为 0
+alert('34.5'>>0); alert(~~'34.5'); // 值为 34
+```
 
-6.在任意位置插入一行js\(单行程序\)：  
-&lt;script type="text/javascript"&gt;alert\("中断一下"\);&lt;/script&gt;  
-&lt;input type="button" onclick="javascript:formName.DataName.value='';formName.DataName.focus\(\);" /&gt;
+### 5.取出数值的小数部分。
+
+```javascript
+//须先检查小数点是否存在。但有时会发生运算误差。
+n = Math.abs(n); if(n>0) n = n - Math.floor(n); else n = 0;
+n = parseInt(n,10) - parseFloat(n);
+if((""+n).indexOf(".") > -1) n = Number("0."+(String(n).split("."))[1]); else n = 0;
+```
+
+### 6.在任意位置插入一行js\(单行程序\)：
+
+```javascript
+<script type="text/javascript">alert("中断一下");</script>
+<input type="button" onclick="javascript:formName.DataName.value='';formName.DataName.focus();" />
+```
 
 7.设置焦点：  
 //document.all\["DateID"\].onfocus;  
