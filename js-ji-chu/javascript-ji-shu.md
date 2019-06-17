@@ -533,56 +533,81 @@ if((""+n).indexOf(".") > -1) n = Number("0."+(String(n).split("."))[1]); else n 
 <input type="button" onclick="javascript:formName.DataName.value='';formName.DataName.focus();" />
 ```
 
-7.设置焦点：  
-//document.all\["DateID"\].onfocus;  
-document.all\["DateID"\].focus\(\);  
-formName.DataName.focus\(\);
+#### 7.设置焦点：
 
-8.默认参数：  
-function show\(\) {  
-alert\( arguments\[0\] \);  
-}  
+```javascript
+//document.all["DateID"].onfocus;
+document.all["DateID"].focus();
+formName.DataName.focus();
+```
+
+#### 8.默认参数：
+
+```python
+function show() {
+alert( arguments[0] );
+}
+```
+
 这个函数会alert出第一个参数，如调用时： show\("haha"\)，则alert\("haha"\);
 
-9.禁止 confirm 與 alert  
-window.confirm = function\(str\){return true;};  
-window.alert = function\(str\){};
+#### 9.禁止 confirm 與 alert
 
-10.获取下拉菜单的内容  
-&lt;select name="seleName" &gt;  
-&lt;option value="value1"&gt;Text&lt;/option&gt;  
-&lt;/select&gt;  
-获取选中的下拉菜单的内容：  
-var seleElement = document.formName.seleName;  
-var optionText = seleElement.options\[seleElement.selectedIndex\].text;
+```javascript
+window.confirm = function(str){return true;};
+window.alert = function(str){};
+```
 
-11.设置默认值:  
-edittype = edittype \|\| "text"; //edittype预设为 text  
-上面一句: 如果 edittype 之前有值,则取之前的值; 之前没有值,则取默认值
+#### 10.获取下拉菜单的内容
 
-12.数值的截取:  
-numObj.toFixed\(\[fractionDigits\]\)  
-//numObj:必选项。一个 Number 对象。  
-//fractionDigits:可选项。小数点后的数字位数。其值必须在 0 – 20 之间，包括 0 和 20。 预设为0  
-toFixed 方法返回一个以定点表示法表示的数字的字符串形式。对数值进行四舍五入截取到指定位数的小数  
-如: 55.3654.toFixed\(2\) //返回55.37
+```javascript
+<select name="seleName" >
+<option value="value1">Text</option>
+</select>
+//获取选中的下拉菜单的内容：
+var seleElement = document.formName.seleName;
+var optionText = seleElement.options[seleElement.selectedIndex].text;
+```
 
-13.IE上的关闭窗口时不提示  
-window.opener = null; // 关闭IE6不提示  
-window.open\("","\_self"\); // 关闭IE7不提示  
-//关闭窗口  
-window.close\(\);
+#### 11.设置默认值:
 
-14.刷新页面的几种方法：  
-history.go\(0\);  
-window.navigate\(location\);  
-document.URL = location.href;  
-document.execCommand\('Refresh'\); //火狐不能用  
-location.reload\(\);  
-location = location;  
-location.href = location.href;  
-location.assign\(location\);  
-location.replace\(location\);
+```javascript
+edittype = edittype || "text"; //edittype预设为 text
+//上面一句: 如果 edittype 之前有值,则取之前的值; 之前没有值,则取默认值
+```
+
+#### 12.数值的截取:
+
+```javascript
+numObj.toFixed([fractionDigits])
+//numObj:必选项。一个 Number 对象。
+//fractionDigits:可选项。小数点后的数字位数。其值必须在 0 – 20 之间，包括 0 和 20。 预设为0
+toFixed 方法返回一个以定点表示法表示的数字的字符串形式。对数值进行四舍五入截取到指定位数的小数
+如: 55.3654.toFixed(2) //返回55.37
+```
+
+#### 13.IE上的关闭窗口时不提示
+
+```javascript
+window.opener = null; // 关闭IE6不提示
+window.open("","_self"); // 关闭IE7不提示
+//关闭窗口
+window.close();j
+```
+
+#### 14.刷新页面的几种方法：
+
+```javascript
+history.go(0);
+window.navigate(location);
+document.URL = location.href;
+document.execCommand('Refresh'); //火狐不能用
+location.reload();
+location = location;
+location.href = location.href;
+location.assign(location);
+location.replace(location);
+```
 
 15.页面跳转：  
 location.href = "yourURL"  
